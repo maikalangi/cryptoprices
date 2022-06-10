@@ -1,10 +1,14 @@
-// import './App.css';
-import './index.css'
-import { Route } from "react-router-dom";
-import Currencies from './pages/Currencies';
-import Main from './pages/Main';
-import Price from './pages/Price';
+// ui components
 import Nav from './components/Nav';
+// page components
+import Main from './pages/Main';
+import Currencies from './pages/Currencies';
+import Price from './pages/Price';
+// component libraries
+import { Route } from "react-router-dom";
+// styles
+import './index.css'
+// import './App.css';
 
 function App() {
   return (
@@ -18,10 +22,8 @@ function App() {
       </Route>
       <Route 
         path="/price/:symbol"
-        render={(routerProps) => <Price {...routerProps} />}
-        >
-        <Price />
-      </Route>
+        render={(renderProps) => <Price {...renderProps} />}
+        />
     </div>
   );
 }

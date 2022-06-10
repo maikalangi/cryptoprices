@@ -1,20 +1,24 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
-const Price=(props)=>{
+// take in symbol and display price
+const Price=({match: { params: { symbol}}})=>{
     const apiKey = "09529A6E-A608-45E0-981B-9D8395F6DCC7";
-    const symbol = props.match.params.symbol;
+    // const symbol = match.params.symbol;
     const url = `http://rest-sandbox.coinapi.io/v1/exchangerate/${symbol}/USD?apikey=${apiKey}`;
     
-    const [coin, setCoin] = React.useState(null);
+    const [coin, setCoin] = useState(null);
 
     const getCoin = async () =>{
         const response = await fetch(url);
         const data = await response.json();
         setCoin(data);
     };
-    React.useEffect(() => {
+    useEffect(() => {
         getCoin();
-    }/* , [] */);
+    }, []);
+    const loading = () => {
+        return <h1>Loading...</h1>;
+    };
     const loaded = () => {
         return (
             <div>
@@ -24,9 +28,6 @@ const Price=(props)=>{
                 <h2>{coin.rate}</h2>
             </div>
         );
-    };
-    const loading = () => {
-        return <h1>Loading...</h1>;
     };
     return coin ? loaded() : loading();
 };
